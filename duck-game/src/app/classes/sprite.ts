@@ -1,8 +1,9 @@
+import { Color } from "../utils/colors";
 import { Pixel } from "./pixel";
 import { PixelLocation } from "./pixel.location";
 import { Repeat } from "./repeat";
 
-export class Sprite{
+export class Sprite {
     pixels: Pixel[] = [];
     repeats: Repeat[];
     location: PixelLocation;
@@ -29,6 +30,13 @@ export class Sprite{
         return pixels;
     }
 
+    protected checkLine(repeats: Repeat[]): void {
+        const sum = repeats.map(repeat => repeat.count).reduce((partialSum, a) => partialSum + a, 0);
+        if (sum % this.WIDTH !== 0) {
+            console.log("We have " + sum + " pixels our of " + repeats.length + " repeats");
+        }
+    }
+
     protected flip(): void {
         let row = -1;
         let collum = -1;
@@ -50,5 +58,15 @@ export class Sprite{
                 }
             }
         }
+    }
+
+    protected goUnder(): void {
+        const water: Pixel[] = [];
+        for (let i = 0; i < this.WIDTH; i++) {
+            water.push(new Pixel(0,0,Color.WATER));
+            this.pixels.pop();
+        }
+        water.push(...this.pixels);
+        this.pixels = water;
     }
 }
