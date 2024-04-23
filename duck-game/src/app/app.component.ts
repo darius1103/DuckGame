@@ -110,12 +110,12 @@ export class AppComponent {
     }
 
     private addNewDuck(): void {
-        // const facingLeft = this.getRandomInt(2) == 1;
-        const facingLeft = true;
+        const facingLeft = this.getRandomInt(2) == 1;
+        // const facingLeft = true;
         const xCoordinate = facingLeft ? this.WIDTH / this.PIXEL_SIZE : 0;
 
-        this.duckCoordinator.addDuck(xCoordinate, 100, facingLeft);
-        // this.duckCoordinator.addDuck(xCoordinate, this.getRandomInt(this.HEIGHT / this.PIXEL_SIZE - 15), facingLeft);
+        // this.duckCoordinator.addDuck(xCoordinate, 100, facingLeft);
+        this.duckCoordinator.addDuck(xCoordinate, this.getRandomInt(this.HEIGHT / this.PIXEL_SIZE - 15), facingLeft);
     }
 
     private drawWater(): void {
